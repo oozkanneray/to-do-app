@@ -46,7 +46,11 @@ function App() {
         onChange={handleInput}
         value={todo}
         className="mr-5 border-2 w-100 h-10 border-indigo-800 rounded-lg bg-transparent text-center placeholder:text-center"
-        placeholder="Add a Todo"></input>
+        placeholder="Add a Todo"
+        onKeyDown={(e) => {
+          if(e.key == "Enter") addTodo()
+        }}
+        ></input>
         <button 
         onClick={addTodo}
         className=" bg-indigo-900 border-slate-700 text-white w-16 h-10 rounded-lg border-2 ml-5" >Add</button>
