@@ -8,6 +8,6 @@ body,html{
   background-color: #e6f5f5;
 }
 
-#root {
- margin: 0 30% 0 30%;
+#root{
+  height: 100vh;
 }
