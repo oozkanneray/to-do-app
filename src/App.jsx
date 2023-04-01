@@ -1,11 +1,11 @@
 import { useState } from "react"
 import Todos from "./components/todos"
-import data from "./datatodo"
 
 function App() {
 
-  const [todo,setTodo] = useState()
-  const [allTodos,setAllTodos] = useState(data)
+  const [todo,setTodo] = useState("")
+  const [allTodos,setAllTodos] = useState([])
+  const [theme,setTheme] = useState("light")
 
 
   const handleInput = (e) => {
@@ -13,32 +13,47 @@ function App() {
   }
 
   const addTodo = () => {
-    setAllTodos([...allTodos,
-      {
-        todoName:todo,
-        isComplete:false
-      }])
+    if(todo != "" ){
+      setAllTodos([...allTodos,
+        {
+          todoName:todo,
+          isCompleted:false
+        }])
+        console.log(allTodos)
+    }
+    setTodo("")
+  }
+
+  const deleteTodo = (index) => {
+    allTodos.splice(index,1)
+    setAllTodos([...allTodos])
+  };
+
+  const handleMark = (index) => {
+
+    allTodos[index].isCompleted = !allTodos[index].isCompleted;
+    setAllTodos([...allTodos])
   }
 
 
+
   return (
-    <div className="flex flex-col item-center justify-center text-center" >
+    <div className="flex flex-col item-center justify-center text-center">
+      <button onClick={() => {setTheme(theme == "light" ? "dark" : "light")}} className="absolute top-5 right-10"> Change Theme: {theme} </button>
       <h1 className="text-5xl m-10 text-indigo-400" >To Do List</h1>
       <div className="flex flex-row justify-center items-center m-5">
-
         <input
         onChange={handleInput}
-        
-        className="mr-5 border-2 h-10 border-indigo-800 rounded-lg bg-transparent text-center placeholder:text-center" placeholder="add a todo"></input>
-        
+        value={todo}
+        className="mr-5 border-2 w-100 h-10 border-indigo-800 rounded-lg bg-transparent text-center placeholder:text-center"
+        placeholder="Add a Todo"></input>
         <button 
-        onClick={() => {addTodo();console.log(todo)}}
+        onClick={addTodo}
         className=" bg-indigo-900 border-slate-700 text-white w-16 h-10 rounded-lg border-2 ml-5" >Add</button>
-      
       </div>
-      <div className="border-2 border-indigo-400 rounded-lg m-5"> 
-      {allTodos.map(item => <Todos item={item} />)}
-       </div>
+      <div className="flex flex-col justify-center items-center">
+        {allTodos.map(item => <Todos key={item.id} deleteTodo={deleteTodo} allTodos={allTodos} handleMark={handleMark} setAllTodos={setAllTodos} item={item}/>)}
+      </div>
     </div>
   )
 }
