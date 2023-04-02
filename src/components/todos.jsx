@@ -1,6 +1,6 @@
 function Todos(props) {
   return (
-    <div className="flex flex-row justify-around w-[35%] items-center text-center border-2 border-indigo-400 rounded-lg m-5 bg-secondColor dark:bg-gray-600 dark:border-gray-300">
+    <div className="flex flex-row justify-around w-[30%] items-center text-center border-2 border-indigo-400 rounded-lg m-5 bg-secondColor dark:bg-gray-600 dark:border-gray-300">
       <div
       
         onClick={() => {
