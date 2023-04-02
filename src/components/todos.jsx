@@ -2,9 +2,12 @@ function Todos(props) {
   return (
     <div className="flex flex-row justify-around w-[30%] items-center text-center border-2 border-indigo-400 rounded-lg m-5 bg-secondColor dark:bg-gray-600 dark:border-gray-300">
       <div
-      
         onClick={() => {
-          props.handleMark(props.allTodos.findIndex(item => item.todoName == props.item.todoName));
+          props.handleMark(
+            props.allTodos.findIndex(
+              (item) => item.todoName == props.item.todoName
+            )
+          );
         }}
         className={
           props.item.isCompleted
@@ -15,9 +18,17 @@ function Todos(props) {
         {props.item.todoName}
       </div>
       <button
-      className="w-[10%] h-8 rounded-lg bg-indigo-900 hover:bg-indigo-700 text-white dark:bg-red-900 dark:hover:bg-red-700 "
-      onClick={()=>{props.deleteTodo(props.allTodos.findIndex(item => item.todoName == props.item.todoName))}}
-      >X</button>
+        className="w-[10%] h-8 rounded-lg bg-indigo-900 hover:bg-indigo-700 text-white dark:bg-red-900 dark:hover:bg-red-700 "
+        onClick={() => {
+          props.deleteTodo(
+            props.allTodos.findIndex(
+              (item) => item.todoName == props.item.todoName
+            )
+          );
+        }}
+      >
+        X
+      </button>
     </div>
   );
 }

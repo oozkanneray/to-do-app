@@ -2,13 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-body,html{
+body,
+html {
   height: 100vh;
   background-color: #e6f5f5;
 }
 
-#root{
+#root {
   height: 100vh;
 }
