@@ -65,7 +65,7 @@ function App() {
 
   return (
     <div className="flex flex-col item-center text-center h-[100%] dark:bg-black">
-      <button onClick={changeTheme} className="absolute top-5 right-10 dark:text-white"> Change Theme: {theme} </button>
+      <button onClick={changeTheme} className="absolute  text-2xl font-bold top-10 right-16 dark:text-white">Change Theme</button>
       <h1 className="text-6xl m-10 text-indigo-400 dark:text-gray-300" >To Do List</h1>
       <div className="flex flex-row justify-center items-center m-8">
         <input
