@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 
-*{transition: 0.2s ease-in-out;}
 
 body,html{
   height: 100vh;
