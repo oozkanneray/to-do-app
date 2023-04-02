@@ -5,7 +5,7 @@ function App() {
 
   const [todo,setTodo] = useState("")
   const [allTodos,setAllTodos] = useState([])
-  const [theme,setTheme] = useState("light")
+  const [theme,setTheme] = useState("dark")
 
 
 
@@ -16,14 +16,13 @@ function App() {
       document.body.classList.add("dark")
     }
     else {document.body.classList.remove("dark")
+    }
   }
-  }
-
-
 
   const handleInput = (e) => {
     setTodo(e.target.value)
   }
+ 
 
   const addTodo = () => {
     if(todo != "" ){
@@ -32,7 +31,6 @@ function App() {
           todoName:todo,
           isCompleted:false
         }])
-        console.log(allTodos)
     }
     setTodo("")
   }
@@ -66,7 +64,7 @@ function App() {
         ></input>
         <button 
         onClick={addTodo}
-        className=" bg-indigo-900 border-slate-700 text-white w-16 h-10 rounded-lg border-2 ml-5 dark:bg-gray-600 dark:border-gray-300" >Add</button>
+        className="bg-indigo-900 text-white w-16 h-10 rounded-lg border-2 ml-5 hover:bg-indigo-700 dark:bg-gray-600 dark:border-gray-300" >Add</button>
       </div>
       <div className="flex flex-col justify-center items-center">
         {allTodos.map(item => <Todos key={item.id} deleteTodo={deleteTodo} allTodos={allTodos} handleMark={handleMark} setAllTodos={setAllTodos} item={item}/>)}

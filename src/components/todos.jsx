@@ -15,7 +15,7 @@ function Todos(props) {
         {props.item.todoName}
       </div>
       <button
-      className="w-[50%] dark:text-white"
+      className="w-[10%] h-8 rounded-lg bg-indigo-900 hover:bg-indigo-700 text-white dark:bg-red-900 dark:hover:bg-red-700 "
       onClick={()=>{props.deleteTodo(props.allTodos.findIndex(item => item.todoName == props.item.todoName))}}
       >X</button>
     </div>
