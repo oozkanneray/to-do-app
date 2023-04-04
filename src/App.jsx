@@ -1,18 +1,29 @@
 import { useEffect, useState } from "react";
 import Todos from "./components/todos";
+import Form from "./components/Form";
+import Header from "./components/Header";
 
 function App() {
+  const initialTodo = [
+    {
+      todoName: "Add Todo",
+      isCompleted: false,
+    },
+  ];
+
+  const parseLocalTodo = (value) => {
+    return JSON.parse(localStorage.getItem(`${value}`));
+  };
+
   const [todo, setTodo] = useState("");
   const [allTodos, setAllTodos] = useState(
     !localStorage.getItem("todo-list")
-      ? []
-      : JSON.parse(localStorage.getItem("todo-list"))
+      ? initialTodo
+      : parseLocalTodo("todo-list")
   );
 
   const [theme, setTheme] = useState(
-    !localStorage.getItem("dark-mode")
-      ? "dark"
-      : JSON.parse(localStorage.getItem("dark-mode"))
+    !localStorage.getItem("dark-mode") ? "dark" : parseLocalTodo("dark-mode")
   );
 
   useEffect(() => {
@@ -33,8 +44,12 @@ function App() {
     setTodo(e.target.value);
   };
 
-  const addTodo = () => {
-    if (todo != "") {
+  const addTodo = (event) => {
+    event.preventDefault();
+
+    const checkSameTodo = allTodos.find((item) => item.todoName === todo);
+
+    if (todo != "" && !checkSameTodo) {
       setAllTodos([
         ...allTodos,
         {
@@ -58,32 +73,8 @@ function App() {
 
   return (
     <div className="flex flex-col item-center text-center h-[100%] dark:bg-black">
-      <button
-        onClick={changeTheme}
-        className="absolute  text-2xl font-bold top-10 right-16 dark:text-white"
-      >
-        Change Theme
-      </button>
-      <h1 className="text-6xl m-10 text-indigo-400 dark:text-gray-300">
-        To Do List
-      </h1>
-      <div className="flex flex-row justify-center items-center m-8">
-        <input
-          onChange={handleInput}
-          value={todo}
-          className="mr-5 border-2 w-100 h-12 border-indigo-800 rounded-lg bg-transparent text-center placeholder:text-center dark:text-white dark:border-gray-300"
-          placeholder="Add a Todo"
-          onKeyDown={(e) => {
-            if (e.key == "Enter") addTodo();
-          }}
-        ></input>
-        <button
-          onClick={addTodo}
-          className="bg-indigo-900 text-white w-16 h-12 rounded-lg border-2 ml-5 hover:bg-indigo-700 dark:bg-gray-600 dark:border-gray-300"
-        >
-          Add
-        </button>
-      </div>
+      <Header changeTheme={changeTheme} />
+      <Form handleInput={handleInput} addTodo={addTodo} todo={todo} />
       <div className="flex flex-col justify-center items-center">
         {allTodos.map((item) => (
           <Todos
